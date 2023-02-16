@@ -54,7 +54,13 @@ class CoreEngineX:
             """
         )
 
-    def invalid_choice(self) -> None:
+    def __track_execution(self) -> None:
+        """
+        Track the execution of files which are executed.
+        """
+        pass
+
+    def __invalid_choice(self) -> None:
         """
         Display the invalid choice message.
 
@@ -67,7 +73,7 @@ class CoreEngineX:
         print("=====================================")
         sys.exit()
 
-    def only_numbers_allowed(self) -> None:
+    def __only_numbers_allowed(self) -> None:
         """
         Display the only numbers are allowed message.
 
@@ -78,7 +84,7 @@ class CoreEngineX:
         print("Only numbers are allowed!!")
         print("=====================================")
 
-    def selected_file_options(self) -> None:
+    def __selected_file_options(self) -> None:
         """
         Display the options for selected file.
 
@@ -105,7 +111,7 @@ class CoreEngineX:
         for key, value in key_value.items():
             os.environ[key] = value
 
-    def fetch_files_from_dir(self, directory: str) -> list:
+    def __fetch_files_from_dir(self, directory: str) -> list:
         """
         Fetch the files from the directory.
 
@@ -129,14 +135,14 @@ class CoreEngineX:
             return self.__list_of_files
         raise FileNotFoundError(f"Directory not found: {directory}")
 
-    def pylint_score_of_python_files(self):
+    def __pylint_score_of_python_files(self):
         """
         Check the pylint score of the python files.
         """
         for each_file in self.__list_of_files:
             os.system(f'python -m pylint {each_file}')
 
-    def execute_python_files(self):
+    def __execute_python_files(self):
         """
         Execute the python files sequentially.
         """
@@ -145,7 +151,7 @@ class CoreEngineX:
             os.system(f'python {each_file}')
             time.sleep(1)
 
-    def list_of_files_menu(self, list_of_files: dict):
+    def __list_of_files_menu(self, list_of_files: dict):
         """
         List of files menu.
         """
@@ -159,7 +165,7 @@ class CoreEngineX:
                 print(f'{each_value}')
         print("=====================================")
 
-    def command_line_menu(self):
+    def __command_line_menu(self):
         """
         Command Line Interface Menu.
         """
@@ -195,32 +201,32 @@ class CoreEngineX:
         inc_file_dict[len(files_and_paths) + 2] = {"Check pylint score of listed files": False}
         inc_file_dict[len(files_and_paths) + 3] = {"Exit": False}
 
-        self.list_of_files_menu(inc_file_dict)
+        self.__list_of_files_menu(inc_file_dict)
 
         try:
             file_inc_number = int(input("Enter the number: "))
         except ValueError:
-            self.only_numbers_allowed()
-            self.command_line_menu()
+            self.__only_numbers_allowed()
+            self.__command_line_menu()
 
         if file_inc_number == len(files_and_paths) + 1:
-            self.execute_python_files()
+            self.__execute_python_files()
         elif file_inc_number == len(files_and_paths) + 2:
-            self.pylint_score_of_python_files()
+            self.__pylint_score_of_python_files()
         elif file_inc_number == len(files_and_paths) + 3:
-            self.invalid_choice()
+            self.__invalid_choice()
         elif file_inc_number in inc_file_dict:
             print("=====================================")
             print(f"You have selected the file: {file_inc_number}.", end = ' ')
             for each_value in inc_file_dict[file_inc_number]:
                 print(f'{each_value}')
-            self.selected_file_options()
+            self.__selected_file_options()
 
             try:
                 user_input = int(input("Enter your choice: "))
             except ValueError:
-                self.only_numbers_allowed()
-                self.command_line_menu()
+                self.__only_numbers_allowed()
+                self.__command_line_menu()
 
             if user_input == 1:
                 print("=====================================")
@@ -234,9 +240,9 @@ class CoreEngineX:
                 print("=====================================")
                 sys.exit()
             else:
-                self.invalid_choice()
+                self.__invalid_choice()
         else:
-            self.invalid_choice()
+            self.__invalid_choice()
 
     def run_coreenginex(self, folder_path: str):
         """
@@ -245,5 +251,5 @@ class CoreEngineX:
         Args:
             folder_path (str): The folder path where the files are present.
         """
-        self.fetch_files_from_dir(directory = folder_path)
-        self.command_line_menu()
+        self.__fetch_files_from_dir(directory = folder_path)
+        self.__command_line_menu()
