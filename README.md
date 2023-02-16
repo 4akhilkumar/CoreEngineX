@@ -9,7 +9,7 @@ CoreEngineX will fetch the python files from the directory/sub-directories. Disp
 ### Read input from command line
 ```python
 import sys
-from coreenginex import CoreEngineX
+from CoreEngineX import CoreEngineX
 
 if __name__ == "__main__":
     ce = CoreEngineX()
@@ -20,7 +20,7 @@ if __name__ == "__main__":
 
 ### Read input from the script
 ```python
-from coreenginex import CoreEngineX
+from CoreEngineX import CoreEngineX
 
 if __name__ == "__main__":
     ce = CoreEngineX()
@@ -31,7 +31,7 @@ if __name__ == "__main__":
 
 ### Load environment variables
 ```python
-from coreenginex import CoreEngineX
+from CoreEngineX import CoreEngineX
 
 if __name__ == "__main__":
     ce = CoreEngineX()
